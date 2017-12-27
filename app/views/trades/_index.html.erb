@@ -1,0 +1,6 @@
+<% @trades.each do |t| %>
+  <p>
+    <%= link_to t.name, trade_path(t) %> |
+    <%= t.created_at.strftime("%b %e, %Y") %>
+  </p>
+<% end %>

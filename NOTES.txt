@@ -1,0 +1,41 @@
+Trader
+has_many :trades
+has_many :instruments, through: :trades
+has_many :comments
+has_many :commented_trades, through: :comments, class_name: "Trade"
+
+
+name
+email
+password
+-------------------------------
+
+Instrument
+has_many :trades
+has_many :traders, through: trades
+
+symbol
+description
+-------------------------------
+
+Trade
+belongs_to :trader
+belongs_to :instrument
+has_many :comments
+
+type
+entry_price
+exit_price
+quantity
+notes
+trader_id
+instrument_id
+-------------------------------
+
+Comment
+belongs_to :trader
+belongs_to :trade
+
+body
+trader_id
+trade_id

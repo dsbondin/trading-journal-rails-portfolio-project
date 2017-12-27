@@ -1,0 +1,27 @@
+<nav>
+
+  <h4>
+    <%= link_to "Home", root_path %> |
+    <% unless trader_signed_in? %>
+      <%= link_to("Sign Up", new_trader_registration_path) %> |
+      <%= link_to("Log In", new_trader_session_path) %> |
+    <% else %>
+      <%= link_to "My Trades", trader_trades_path(current_trader) %> |
+      <%= link_to "All Trades", trades_path %> |
+      <%= link_to "Traders", traders_path %> |
+      <%= link_to "Instruments", instruments_path %> |
+      <%= link_to "Best Trade", trades_best_path %> |
+      <%= link_to "Worst Trade", trades_worst_path %> |
+      <%= link_to "New Trade", new_trader_trade_path(current_trader) %> |
+      <%= link_to("Sign out", destroy_trader_session_path, :method => 'delete') %>
+      <div align="right">
+        <p><%= current_trader.email %></p>
+      </div>
+    <% end %>
+  </h4>
+
+  <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+  <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+  <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+
+</nav>

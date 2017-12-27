@@ -1,0 +1,8 @@
+<h3>Traders</h3>
+
+<% @traders.each do |trader| %>
+  <p>
+    <%= link_to trader.email, trader_path(trader) %> &nbsp;&nbsp;
+    <%= " <<  current leader" if trader == @leader %>
+  </p>
+<% end %>

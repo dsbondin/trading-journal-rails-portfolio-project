@@ -1,0 +1,14 @@
+<% if @trades && !@trades.empty? %>
+  <% if @trader %>
+    <h3>Trades by <%= @trader.email %></h3>
+  <% elsif @instrument %>
+    <h3>Trades with <%= @instrument.symbol %></h3>
+  <% else %>
+    <h3>All Trades</h3>
+  <% end %>
+
+  <%= render 'index' %>
+
+<% else %>
+  <h3>No trades yet</h3>
+<% end %>

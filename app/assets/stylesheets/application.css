@@ -1,0 +1,28 @@
+@font-face {
+    font-family: "Muli";
+    src: url(https://fonts.googleapis.com/css?family=Muli) format("truetype");
+}
+
+body {
+   width: 794px;
+   height: 100%;
+   margin: auto;
+   padding: 10px;
+   background-color: #FFF;
+   font-family: "Muli", sans-serif, verdana, georgia;
+   padding-bottom: 30px;
+}
+
+nav {
+  padding: 10px;
+  height: 80px;
+  background-color: #CCC;
+}
+
+div.field_with_errors {
+  border: 1px solid red;
+}
+
+div.error_messages {
+  color: red
+}

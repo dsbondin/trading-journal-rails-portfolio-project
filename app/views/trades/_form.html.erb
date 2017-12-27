@@ -1,0 +1,48 @@
+<% if @trade.errors.any? %>
+  <div class="error_messages">
+    <% @trade.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% end %>
+
+<%= form_for @trade do |f| %>
+  <p>
+    <%= f.label "TRADE DIRECTION:" %>
+    <%= f.radio_button :direction , "long", checked: true %> Long
+    <%= f.radio_button :direction , "short" %> Short
+  </p>
+
+  <p>
+    <%= f.label "Choose Instrument:" %>
+    <%= f.collection_select :instrument_id, Instrument.order(:symbol), :id, :symbol, include_blank: true %>
+
+    <%= f.label "Or add new:" %>
+    <%= f.fields_for :instrument, @trade.build_instrument do |i| %>
+      <%= i.text_field :symbol, size: "8x1" %>
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.label "Entry price:" %>
+    <%= f.number_field :entry, step: :any %>
+  </p>
+
+  <p>
+    <%= f.label "Exit price:" %>
+    <%= f.number_field :exit, step: :any %>
+  </p>
+
+  <p>
+    <%= f.label "Quantity:" %>
+    <%= f.number_field :quantity %>
+  </p>
+
+  <p>
+    <%= f.label "Notes:" %>
+    <%= f.text_area :notes, size: "50x2" %>
+  </p>
+
+  <%= f.submit %>
+
+<% end %>

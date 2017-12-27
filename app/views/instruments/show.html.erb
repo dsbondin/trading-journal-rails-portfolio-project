@@ -1,0 +1,5 @@
+<h3><%= @instrument.symbol %></h3>
+
+<p>
+  <%= link_to pluralize(@instrument.trades.count, "trades"), instrument_trades_path(@instrument) %>
+</p>

@@ -1,0 +1,5 @@
+<h3>Instruments</h3>
+
+<% @instruments.each do |i| %>
+  <p><%= link_to i.symbol, instrument_path(i) %></p>
+<% end %>
