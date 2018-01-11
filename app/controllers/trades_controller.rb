@@ -1,4 +1,5 @@
 class TradesController < ApplicationController
+  before_action :set_trade, only: [:show, :edit, :update, :destroy]
 
   def index
     if id = params[:trader_id]
@@ -13,7 +14,6 @@ class TradesController < ApplicationController
   end
 
   def show
-    set_trade
   end
 
   def new
@@ -30,13 +30,12 @@ class TradesController < ApplicationController
   end
 
   def edit
-    set_trade
   end
 
   def update
-    set_trade
     if @trade.trader == current_trader
       if @trade.update(trade_params)
+        flash[:notice] = "Trade edited successfully."
         redirect_to trade_path(@trade)
       else
         render :edit
@@ -48,9 +47,9 @@ class TradesController < ApplicationController
   end
 
   def destroy
-    set_trade
     if @trade.trader == current_trader
       @trade.delete
+      flash[:notice] = "Trade deleted."
     else
       flash[:error] = "You are not authorized to delete this trade!"
     end

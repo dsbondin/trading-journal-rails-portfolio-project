@@ -1,11 +1,10 @@
 class CallbacksController < Devise::OmniauthCallbacksController
+  before_action :sign_in_trader
 
   def facebook
-    sign_in_trader
   end
 
   def github
-    sign_in_trader
   end
 
   private
