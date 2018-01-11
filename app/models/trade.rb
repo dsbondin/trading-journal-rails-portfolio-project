@@ -1,7 +1,7 @@
 class Trade < ApplicationRecord
   belongs_to :trader
   belongs_to :instrument
-  accepts_nested_attributes_for :instrument
+  # accepts_nested_attributes_for :instrument
 
   validates :entry, numericality: {greater_than: 0}
   validates :exit, numericality: {greater_than: 0}
@@ -19,9 +19,9 @@ class Trade < ApplicationRecord
     (direction == "long" ? ((exit - entry) * quantity) : ((entry - exit) * quantity)).round(2)
   end
 
-  def formatted_profit_loss
-    profit_loss >= 0 ? "$#{profit_loss}" : "-$#{-profit_loss}"
-  end
+  # def formatted_profit_loss
+  #   profit_loss >= 0 ? "$#{profit_loss}" : "-$#{-profit_loss}"
+  # end
 
   def self.most_profitable
     all.max_by { |trade| trade.profit_loss }
