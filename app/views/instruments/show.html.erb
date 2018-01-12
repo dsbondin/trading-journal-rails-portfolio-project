@@ -1,5 +1,9 @@
 <h3><%= @instrument.symbol %></h3>
 
-<p>
-  <%= link_to pluralize(@instrument.trades.count, "trades"), instrument_trades_path(@instrument) %>
+<!-- Links depend on the presence of @trader instance -->
+<p><% if @trader %>
+     <%= link_to "Trades", trader_instrument_trades_path(@trader, @instrument) %>
+   <% else %>
+     <%= link_to pluralize(@instrument.trades.count, "trades"), instrument_trades_path(@instrument) %>
+   <% end %>
 </p>

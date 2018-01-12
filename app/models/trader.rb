@@ -5,7 +5,7 @@ class Trader < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook, :github]
 
   has_many :trades
-  has_many :instruments, through: :trades
+  has_many :instruments, -> { distinct }, through: :trades
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |trader|

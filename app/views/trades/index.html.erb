@@ -1,5 +1,9 @@
 <% if @trades && !@trades.empty? %>
-  <% if @trader %>
+
+<!-- Check if both @trader and @instrument are passed by controller -->
+  <% if @trader and @instrument %>
+    <h3>Trades by <%= @trader.email %> with <%= @instrument.symbol %></h3>
+  <% elsif @trader %>
     <h3>Trades by <%= @trader.email %></h3>
   <% elsif @instrument %>
     <h3>Trades with <%= @instrument.symbol %></h3>

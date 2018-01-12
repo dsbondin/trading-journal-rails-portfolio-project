@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   resources :traders, only: [:index, :show] do
     resources :trades, only: [:show, :index, :new]
-    resources :instruments, only: [:index, :show]
+    resources :instruments, only: [:index, :show] do
+      resources :trades, only: [:index]  # Add another nested route
+    end
   end
 
   resources :instruments, only: [:index, :show] do

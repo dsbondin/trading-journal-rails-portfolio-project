@@ -2,7 +2,16 @@ class TradesController < ApplicationController
   before_action :set_trade, only: [:show, :edit, :update, :destroy]
 
   def index
-    if id = params[:trader_id]
+    # find @trades that only belong to a particular instrument AND a trader
+    if trader_id = params[:trader_id] and instrument_id = params[:instrument_id]
+      @trader = Trader.find_by(id: trader_id)
+      @instrument = Instrument.find_by(id: instrument_id)
+      trades = @trader.trades
+      @trades = trades.select do |trade|   # This actually works! (select! didn't work for some reason,
+        @instrument.trades.include?(trade) # probably because it's a collection of instances, not a vanilla array)
+      end
+
+    elsif id = params[:trader_id]
       @trader = Trader.find_by(id: id)
       @trades = @trader.trades
     elsif id = params[:instrument_id]
