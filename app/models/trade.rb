@@ -1,6 +1,7 @@
 class Trade < ApplicationRecord
   belongs_to :trader
   belongs_to :instrument
+  has_many :comments
   # accepts_nested_attributes_for :instrument
 
   validates :entry, numericality: {greater_than: 0}
