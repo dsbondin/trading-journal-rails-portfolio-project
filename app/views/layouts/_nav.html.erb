@@ -6,7 +6,7 @@
       <%= link_to("Sign Up", new_trader_registration_path) %> |
       <%= link_to("Log In", new_trader_session_path) %> |
     <% else %>
-      <%= link_to "My Trades", trader_trades_path(current_trader) %> |
+      <%= link_to "My Desk", trader_path(current_trader) %> |
       <%= link_to "All Trades", trades_path %> |
       <%= link_to "Traders", traders_path %> |
       <%= link_to "Instruments", instruments_path %> |
