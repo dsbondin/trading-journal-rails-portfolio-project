@@ -19,7 +19,7 @@ class TradesController < ApplicationController
 
     respond_to do |format|
       format.html {render :index}
-      format.json {render json: @trades.to_json(include: :instrument)}
+      format.json {render json: @trades.to_json(include: :instrument )}
     end
   end
 
