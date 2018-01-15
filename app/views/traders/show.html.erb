@@ -13,8 +13,12 @@
 </div>
 
 <p>
-  Traded <%= link_to pluralize(@trader.instruments.count, 'instrument'), trader_instruments_path(@trader) %>
+  Traded <%= link_to pluralize(@trader.instruments.count, 'instrument'), trader_instruments_path(@trader), class: "instruments" %>
 </p>
+
+<div id="instruments">
+  <ol></ol>
+</div>
 
 <p>
   Total profit/loss: <%= to_currency(@trader.total_pnl) %>

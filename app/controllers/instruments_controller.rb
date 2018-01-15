@@ -7,6 +7,11 @@ class InstrumentsController < ApplicationController
     else
       @instruments = Instrument.order(symbol: :asc)
     end
+
+    respond_to do |format|
+      format.html { render :index}
+      format.json { render json: @instruments}
+    end
   end
 
   def show
