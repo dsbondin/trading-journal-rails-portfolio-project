@@ -6,11 +6,7 @@ class TradesController < ApplicationController
     if trader_id = params[:trader_id] and instrument_id = params[:instrument_id]
       @trader = Trader.find_by(id: trader_id)
       @instrument = Instrument.find_by(id: instrument_id)
-      trades = @trader.trades
-      @trades = trades.select do |trade|   # This actually works! (select! didn't work for some reason,
-        @instrument.trades.include?(trade) # probably because it's a collection of instances, not a vanilla array)
-      end
-
+      @trades = Trade.where(trader_id: trader_id, instrument_id: instrument_id)
     elsif id = params[:trader_id]
       @trader = Trader.find_by(id: id)
       @trades = @trader.trades
@@ -19,6 +15,11 @@ class TradesController < ApplicationController
       @trades = @instrument.trades
     else
       @trades = Trade.all
+    end
+
+    respond_to do |format|
+      format.html {render :index}
+      format.json {render json: @trades.to_json(include: :instrument)}
     end
   end
 

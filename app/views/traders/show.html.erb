@@ -1,12 +1,16 @@
 <h3><%= @trader.email %></h3>
 
 <p>
-  <%= link_to pluralize(@trader.trades.count, 'trade'), trader_trades_path(@trader) %> |
+  <%= link_to pluralize(@trader.trades.count, 'trade'), trader_trades_path(@trader), class: "trades" %> |
   <% unless @trader.trades.empty? %>
     <%= link_to "Best", trader_trade_path(@trader, @trader.best_trade) %> |
     <%= link_to "Worst", trader_trade_path(@trader, @trader.worst_trade) %>
   <% end %>
 </p>
+
+<div id="trades">
+  <ol></ol>
+</div>
 
 <p>
   Traded <%= link_to pluralize(@trader.instruments.count, 'instrument'), trader_instruments_path(@trader) %>
