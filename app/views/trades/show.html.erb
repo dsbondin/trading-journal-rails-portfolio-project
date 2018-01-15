@@ -1,4 +1,4 @@
-<%= link_to "Previous", "/trades/#{@trade.id - 1}", class: "previous_trade" %>
+<%= link_to "Previous", "/trades/#{@trade.id - 1}", class: "previous_trade" if @trade.id > 1 %>
 <%= link_to "Next", "/trades/#{@trade.id + 1}", class: "next_trade" %>
 
 <div id="trade_info">
@@ -55,5 +55,8 @@
   </p>
   <p>
     Size: {{size}}
+  </p>
+  <p>
+    Notes:
   </p>
 </script>
