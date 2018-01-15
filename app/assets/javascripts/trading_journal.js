@@ -33,13 +33,22 @@ const loadInstruments = function() {
 }
 
 const nextTrade = function() {
-  $("a.next_trade").click(function(e){
-    e.preventDefault();
-    $.getJSON(this.href).success(function(trade) {
+  $("a.js-next").click(function(e){
+    let $nextId = parseInt($(this).attr("trade-id")) + 1;
+    $.getJSON("/trades/" + $nextId).done(function(trade) {
       console.log(trade)
-      const source = $("trade_template").innerHTML;
-      const template = Handlebars.compile(source);
-      const html = template(trade)
+      let tradeInfo = trade.direction + " " + trade.instrument.symbol + " | Trader: " + trade.trader.email
+      $("h3#trade-info").text(tradeInfo)
+      $("p#date").html("Date: " + trade.created_at.slice(0, 10))
+      $("p#entry").html("Entry: " + trade.entry)
+      $("p#exit").html("Exit: " + trade.exit)
+      $("p#size").html("Size: " + trade.quantity)
+      $("p#pnl").html("")
+      $("p#notes").html("Notes: " + trade.notes)
+      $(".js-next").attr("trade-id", trade.id)
+    })
+    .fail(function(){
+      alert("Something went wrong!")
     })
   })
 }

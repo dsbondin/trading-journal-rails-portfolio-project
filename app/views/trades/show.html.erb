@@ -1,37 +1,35 @@
-<%= link_to "Previous", "/trades/#{@trade.id - 1}", class: "previous_trade" if @trade.id > 1 %>
-<%= link_to "Next", "/trades/#{@trade.id + 1}", class: "next_trade" %>
+<%= link_to "Previous", "/trades/#{@trade.id - 1}", class: "previous-trade" if @trade.id > 1 %>
+<a href="#" class="js-next" trade-id="<%= @trade.id %>">Next Trade</a>
 
-<div id="trade_info">
-  <h3>
+  <h3 id="trade-info">
     <%= @trade.direction.capitalize %>
     <%= @trade.instrument.symbol %> |
     Trader: <%= @trade.trader.email %>
   </h3>
 
-  <p>
+  <p id="date">
     Date: <%= @trade.created_at.strftime("%b %e, %Y") %>
   </p>
 
-  <p>
+  <p id="entry">
     Entry price: <%= to_currency(@trade.entry) %>
   </p>
 
-  <p>
+  <p id="exit">
     Exit price: <%= to_currency(@trade.exit) %>
   </p>
 
-  <p>
+  <p id="size">
     Size: <%= @trade.quantity %>
   </p>
 
-  <p>
-    Profit/loss: <%= to_currency(@trade.profit_loss) %>
-  </p>
+    <p id="pnl">
+      Profit/loss: <%= to_currency(@trade.profit_loss) %>
+    </p>
 
-  <p>
+  <p id="notes">
     Notes: <%= @trade.notes %>
   </p>
-</div>
 
 <p>
   <% if @trade.trader == current_trader %>
@@ -39,24 +37,3 @@
     <%= link_to("Delete", @trade, method: :delete) %>
   <% end %>
 </p>
-
-<script id="trade-template" type="text/x-handlebars-template">
-  <h3>
-    {{direction}} {{symbol}} | Trader: {{email}}
-  </h3>
-  <p>
-    Date: {{created_at}}
-  </p>
-  <p>
-    Entry price: ${{entry}}
-  </p>
-  <p>
-    Exit price: ${{exit}}
-  </p>
-  <p>
-    Size: {{size}}
-  </p>
-  <p>
-    Notes:
-  </p>
-</script>

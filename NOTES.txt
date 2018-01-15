@@ -7,7 +7,7 @@ with the backend rendering the trades in JSON format, and then appending the tra
 trade being fetched and rendered via JQuery/AJAX.
 
 3. The rails API must reveal at least one has-many relationship in the JSON that is then rendered to the page.
-For example if each of those posts has many comments, you could render those comments as well on that show page.
+For example if each of those trades has many comments, you could render those comments as well on that show page.
 
 4. A user might be able to add a comment to a trade, and the comment would be serialized, and submitted
 via an AJAX POST request, with the response being the new object in JSON and then appending that new comment to
