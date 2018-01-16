@@ -24,7 +24,9 @@ class TradesController < ApplicationController
   end
 
   def show
+
     if !!@trade
+      @comment = @trade.comments.build
       respond_to do |format|
         format.html {render :show}
         format.json {render json: @trade.to_json(include: [:trader, :instrument])}

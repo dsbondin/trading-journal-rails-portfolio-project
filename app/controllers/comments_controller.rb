@@ -1,9 +1,10 @@
-class CommentsController < ApplcationController
-
-  def new
-  end
+class CommentsController < ApplicationController
 
   def create
+    # raise params.inspect
+    trade = Trade.find_by(params[:trade_id])
+    @comment = trade.comments.create(comment_params)
+    render json: @comment.to_json
   end
 
   def edit
@@ -17,6 +18,7 @@ class CommentsController < ApplcationController
 
   private
     def comment_params
+      params.require(:comment).permit(:body)
     end
 
 end

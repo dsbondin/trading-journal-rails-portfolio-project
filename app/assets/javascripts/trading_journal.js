@@ -56,10 +56,12 @@ const renderTrade = function(trade) {
   $("p#pnl").text("");
   $("p#notes").text("Notes: " + trade.notes);
   $(".js-next").attr("trade-id", trade.id);
+  $("#trade_id").val(trade.id);
+  $(".hide-when-no-trade").show();
 }
 
 const renderEmptyTrade = function(trade) {
   $("h3#trade-info").text(trade.error);
-  $(".trade-attr").text("");
+  $(".hide-when-no-trade").hide();
   $(".js-next").attr("trade-id", trade.id);
 }
