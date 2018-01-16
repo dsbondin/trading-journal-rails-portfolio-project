@@ -1,4 +1,4 @@
-<a href="#" class="js-next" trade-id="<%= @trade.id %>">Next Trade</a>
+<a href="#" class="trade_id" trade-id="<%= @trade.id %>">Next Trade</a>
 
   <h3 id="trade-info">
     <%= @trade.direction.capitalize %>
@@ -30,19 +30,14 @@
     Notes: <%= @trade.notes %>
   </p>
 
-<p class="trade-attr">
+<p class="hide-when-no-trade">
   <% if @trade.trader == current_trader %>
     <%= link_to"Edit", edit_trade_path(@trade) %> |
     <%= link_to("Delete", @trade, method: :delete) %>
   <% end %>
 </p>
 
-<div id="comments"></div>
 
-<div class="hide-when-no-trade" %>
-  <%= form_for @comment do |f| %>
-    <%= f.text_area :body, size: "50x2" %><br>
-    <%= hidden_field_tag :trade_id %>
-    <%= f.submit %>
-  <% end %>
+<div id="comments" class="hide-when-no-trade">
+  <p><button href="/comments" class="trade_id" trade-id="<%= @trade.id %>" id="show-comments">Show Comments</button></p>
 </div>

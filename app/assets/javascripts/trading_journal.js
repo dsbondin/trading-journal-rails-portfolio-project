@@ -2,10 +2,11 @@ $(document).ready(function() {
   loadTrades();
   loadInstruments();
   nextTrade();
+  loadComments();
 })
 
 const loadTrades = function() {
-  $("a.trades").click(function(e){
+  $("a.trades").click(function(e) {
     e.preventDefault();
     $.getJSON(this.href).success(function(trades) {
       // debugger
@@ -19,7 +20,7 @@ const loadTrades = function() {
 }
 
 const loadInstruments = function() {
-  $("a.instruments").click(function(e){
+  $("a.instruments").click(function(e) {
     e.preventDefault();
     $.getJSON(this.href).success(function(instruments) {
       // debugger
@@ -33,7 +34,7 @@ const loadInstruments = function() {
 }
 
 const nextTrade = function() {
-  $("a.js-next").click(function(e){
+  $("a.trade_id").click(function(e) {
     let $nextId = parseInt($(this).attr("trade-id")) + 1;
     $.getJSON("/trades/" + $nextId).done(function(trade) {
       console.log(trade)
@@ -55,13 +56,21 @@ const renderTrade = function(trade) {
   $("p#size").text("Size: " + trade.quantity);
   $("p#pnl").text("");
   $("p#notes").text("Notes: " + trade.notes);
-  $(".js-next").attr("trade-id", trade.id);
-  $("#trade_id").val(trade.id);
+  $(".trade_id").attr("trade-id", trade.id);
+  // $(".trade_id").val(trade.id);
   $(".hide-when-no-trade").show();
 }
 
 const renderEmptyTrade = function(trade) {
   $("h3#trade-info").text(trade.error);
   $(".hide-when-no-trade").hide();
-  $(".js-next").attr("trade-id", trade.id);
+  $(".trade_id").attr("trade-id", trade.id);
+}
+
+const loadComments = function() {
+  $("button#show-comments").click(function() {
+    $.getJSON(this.href).done(function() {
+
+    })
+  })
 }

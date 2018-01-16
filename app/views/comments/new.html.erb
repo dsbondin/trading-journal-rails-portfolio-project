@@ -1,0 +1,7 @@
+<div class="hide-when-no-trade" %>
+  <%= form_for @comment do |f| %>
+    <%= f.text_area :body, size: "50x2" %><br>
+    <%= hidden_field_tag :trade_id, @trade.id %> <!--this is updated dynamically in JS as this form is static and trades are changing -->
+    <%= f.submit %>
+  <% end %>
+</div>

@@ -24,7 +24,6 @@ class TradesController < ApplicationController
   end
 
   def show
-
     if !!@trade
       @comment = @trade.comments.build
       respond_to do |format|
