@@ -7,27 +7,27 @@
     Trader: <%= @trade.trader.email %>
   </h3>
 
-  <p id="date">
+  <p id="date" class="trade-attr">
     Date: <%= @trade.created_at.strftime("%b %e, %Y") %>
   </p>
 
-  <p id="entry">
+  <p id="entry" class="trade-attr">
     Entry price: <%= to_currency(@trade.entry) %>
   </p>
 
-  <p id="exit">
+  <p id="exit" class="trade-attr">
     Exit price: <%= to_currency(@trade.exit) %>
   </p>
 
-  <p id="size">
+  <p id="size" class="trade-attr">
     Size: <%= @trade.quantity %>
   </p>
 
-    <p id="pnl">
+    <p id="pnl" class="trade-attr">
       Profit/loss: <%= to_currency(@trade.profit_loss) %>
     </p>
 
-  <p id="notes">
+  <p id="notes" class="trade-attr">
     Notes: <%= @trade.notes %>
   </p>
 

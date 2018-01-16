@@ -37,18 +37,29 @@ const nextTrade = function() {
     let $nextId = parseInt($(this).attr("trade-id")) + 1;
     $.getJSON("/trades/" + $nextId).done(function(trade) {
       console.log(trade)
-      let tradeInfo = trade.direction + " " + trade.instrument.symbol + " | Trader: " + trade.trader.email
-      $("h3#trade-info").text(tradeInfo)
-      $("p#date").html("Date: " + trade.created_at.slice(0, 10))
-      $("p#entry").html("Entry: " + trade.entry)
-      $("p#exit").html("Exit: " + trade.exit)
-      $("p#size").html("Size: " + trade.quantity)
-      $("p#pnl").html("")
-      $("p#notes").html("Notes: " + trade.notes)
-      $(".js-next").attr("trade-id", trade.id)
-    })
-    .fail(function(){
-      alert("Something went wrong!")
+      if (!trade.error) {
+        renderTrade(trade);
+      } else {
+        renderEmptyTrade(trade);
+      }
     })
   })
+}
+
+const renderTrade = function(trade) {
+  let tradeInfo = trade.direction + " " + trade.instrument.symbol + " | Trader: " + trade.trader.email;
+  $("h3#trade-info").text(tradeInfo);
+  $("p#date").text("Date: " + trade.created_at.slice(0, 10));
+  $("p#entry").text("Entry: " + trade.entry);
+  $("p#exit").text("Exit: " + trade.exit);
+  $("p#size").text("Size: " + trade.quantity);
+  $("p#pnl").text("");
+  $("p#notes").text("Notes: " + trade.notes);
+  $(".js-next").attr("trade-id", trade.id);
+}
+
+const renderEmptyTrade = function(trade) {
+  $("h3#trade-info").text(trade.error);
+  $(".trade-attr").text("");
+  $(".js-next").attr("trade-id", trade.id);
 }

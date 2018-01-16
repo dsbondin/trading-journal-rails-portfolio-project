@@ -24,9 +24,13 @@ class TradesController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html {render :show}
-      format.json {render json: @trade.to_json(include: [:trader, :instrument])}
+    if !!@trade
+      respond_to do |format|
+        format.html {render :show}
+        format.json {render json: @trade.to_json(include: [:trader, :instrument])}
+      end
+    else
+      render json: {error: "This trade has been deleted or hasn't been created yet.", id: params[:id]}
     end
   end
 
