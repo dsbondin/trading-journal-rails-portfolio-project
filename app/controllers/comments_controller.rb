@@ -2,8 +2,10 @@ class CommentsController < ApplicationController
 
   def create
     # raise params.inspect
-    trade = Trade.find_by(params[:trade_id])
+    trade = Trade.find_by(id: params[:trade_id])
     @comment = trade.comments.create(comment_params)
+    @comment.trader = current_trader
+    @comment.save
     render json: @comment.to_json
   end
 
