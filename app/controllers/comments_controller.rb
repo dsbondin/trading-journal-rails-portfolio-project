@@ -1,11 +1,11 @@
 class CommentsController < ApplicationController
 
   def index
-    trade = Trade.find_by(id: params[trade_id])
+    trade = Trade.find_by(id: params[:trade_id])
     @comments = trade.comments
-    render json: @comments.to_json
+    render json: @comments.to_json(include: :trader)
   end
-  
+
   def new
     @comment = Comment.new
   end

@@ -18,8 +18,9 @@ Rails.application.routes.draw do
   get '/trades/best' => 'trades#best'
   get '/trades/worst' => 'trades#worst'
 
-  resources :trades
-  resources :comments, only: [:index, :show, :new, :create]
+  resources :trades do
+    resources :comments, only: [:index, :show, :new, :create]
+  end
 
 
 
