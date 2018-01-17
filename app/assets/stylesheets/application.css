@@ -26,3 +26,8 @@ div.field_with_errors {
 div.error_messages {
   color: red
 }
+
+#comments {
+  color: #777;
+  font-size: 80%
+}
