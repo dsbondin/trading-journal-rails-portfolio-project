@@ -1,5 +1,6 @@
 <a href="#" class="trade_id" trade-id="<%= @trade.id %>">Next Trade</a>
 
+<div id="trade-container">
   <h3 id="trade-info">
     <%= @trade.direction.capitalize %>
     <%= @trade.instrument.symbol %> |
@@ -30,14 +31,39 @@
     Notes: <%= @trade.notes %>
   </p>
 
-<p class="hide-when-no-trade">
-  <% if @trade.trader == current_trader %>
-    <%= link_to"Edit", edit_trade_path(@trade) %> |
-    <%= link_to("Delete", @trade, method: :delete) %>
-  <% end %>
-</p>
+  <p class="hide-when-no-trade">
+    <% if @trade.trader == current_trader %>
+      <%= link_to"Edit", edit_trade_path(@trade) %> |
+      <%= link_to("Delete", @trade, method: :delete) %>
+    <% end %>
+  </p>
+</div>
 
-<p><button href="/comments" class="trade_id" trade-id="<%= @trade.id %>" id="show-comments">Show Comments</button></p>
+<p><button href="/comments" class="trade_id hide-when-no-trade" trade-id="<%= @trade.id %>" id="show-comments">Show Comments</button></p>
 
 <div id="comments" class="hide-when-no-trade">
 </div>
+
+<script id="trade-template" type="text/x-handlebars-template">
+  <h3>
+    {{direction}} {{instrument}} | Trader: {{trader}}
+  </h3>
+  <p>
+    Date: {{date}}
+  </p>
+  <p>
+    Entry price: {{entry}}
+  </p>
+  <p>
+    Exit price: {{exit}}
+  </p>
+  <p>
+    Size: {{size}}
+  </p>
+  <p>
+    Profit/loss:
+  </p>
+  <p>
+    Notes: {{notes}}
+  </p>
+</script>

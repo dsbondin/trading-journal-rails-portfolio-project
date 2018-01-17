@@ -36,12 +36,19 @@ const loadInstruments = function() {
 const nextTrade = function() {
   $("a.trade_id").click(function(e) {
     let $nextId = parseInt($(this).attr("trade-id")) + 1;
-    $.getJSON("/trades/" + $nextId).done(function(trade) {
+    $.getJSON("/trades/" + $nextId).done(function(json) {
       // console.log(trade)
-      if (!trade.error) {
-        renderTrade(trade);
+      if (!json.error) {
+        // renderTrade(trade);
+        let trade = new Trade(json);
+        let tradeHTML = trade.renderTrade();
+        $("#trade-container").html(tradeHTML);
+        $(".trade_id").attr("trade-id", trade.id);
+        $(".hide-when-no-trade").show();
+        $("#comments").html("")
+        $("button#show-comments").show()
       } else {
-        renderEmptyTrade(trade);
+        renderEmptyTrade(json);
       }
     })
   })
@@ -59,27 +66,20 @@ class Trade {
     this.instrument = json.instrument.symbol;
     this.trader = json.trader.email;
   }
-
-const renderTrade = function(trade) {
-  let tradeInfo = trade.direction + " " + trade.instrument.symbol + " | Trader: " + trade.trader.email;
-  $("h3#trade-info").text(tradeInfo);
-  $("p#date").text("Date: " + trade.created_at.slice(0, 10));
-  $("p#entry").text("Entry: " + trade.entry);
-  $("p#exit").text("Exit: " + trade.exit);
-  $("p#size").text("Size: " + trade.quantity);
-  $("p#pnl").text("");
-  $("p#notes").text("Notes: " + trade.notes);
-  $(".trade_id").attr("trade-id", trade.id);
-  // $(".trade_id").val(trade.id);
-  $(".hide-when-no-trade").show();
-  $("#comments").html("")
-  $("button#show-comments").show()
+    renderTrade() {
+      return Trade.template(this)
+    }
 }
 
-const renderEmptyTrade = function(trade) {
-  $("h3#trade-info").text(trade.error);
+$(function() {
+  Trade.source = $("#trade-template").html();
+  Trade.template = Handlebars.compile(Trade.source);
+})
+
+const renderEmptyTrade = function(json) {
+  $("#trade-container").html("<p>" + json.error + "<p>");
   $(".hide-when-no-trade").hide();
-  $(".trade_id").attr("trade-id", trade.id);
+  $(".trade_id").attr("trade-id", json.id);
 }
 
 const loadComments = function() {
