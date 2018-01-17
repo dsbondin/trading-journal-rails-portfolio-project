@@ -61,6 +61,10 @@ class Trade {
       return Trade.template(this)
     }
 
+    get PNL() {
+      return this.profitLoss();
+    }
+
     profitLoss() {
       let pnl
       this.direction === "long" ? pnl = (this.exit - this.entry) * this.size : pnl = (this.entry - this.exit) * this.size
@@ -82,6 +86,7 @@ const renderNormalTrade = function(json) {
   $(".trade_id").attr("trade-id", trade.id);
   $(".hide-when-no-trade").show();
   $("#comments").html("")
+  $("#comment-form").html("")
   $("button#show-comments").show()
   $("button#add-comment").hide();
 }

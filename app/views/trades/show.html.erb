@@ -37,9 +37,10 @@
 <div id="comments" class="hide-when-no-trade">
 </div>
 
-<p><button style="display: none" class="hide-when-no-trade" trade-id="<%= @trade.id %>" id="add-comment">Add Comment</button></p>
+<p><button style="display: none" class="trade_id hide-when-no-trade" trade-id="<%= @trade.id %>" id="add-comment">Add Comment</button></p>
 
-<div id="comment-form"></div>
+<div id="comment-form">
+</div>
 
 <script id="trade-template" type="text/x-handlebars-template">
   <h3>
@@ -58,7 +59,7 @@
     Size: {{size}}
   </p>
   <p>
-    Profit/loss: {{profitLoss}}
+    Profit/loss: {{PNL}}
   </p>
   <p>
     Notes: {{notes}}
