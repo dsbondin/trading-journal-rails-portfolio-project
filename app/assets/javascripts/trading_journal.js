@@ -69,6 +69,14 @@ class Trade {
     renderTrade() {
       return Trade.template(this)
     }
+
+    profitLoss() {
+      let pnl
+      this.direction === "long" ? pnl = (this.exit - this.entry) * this.size : pnl = (this.entry - this.exit) * this.size
+      pnl = parseInt(pnl)
+      pnl >= 0 ? pnl = `$${pnl}` : pnl = `-$${-pnl}`
+      return pnl
+    }
 }
 
 $(function() {
