@@ -47,6 +47,19 @@ const nextTrade = function() {
   })
 }
 
+class Trade {
+  constructor(json) {
+    this.id = json.id;
+    this.direction = json.direction;
+    this.date = json.created_at.slice(0, 10);
+    this.entry = json.entry;
+    this.exit = json.exit;
+    this.size = json.quantity;
+    this.notes = json.notes;
+    this.instrument = json.instrument.symbol;
+    this.trader = json.trader.email;
+  }
+
 const renderTrade = function(trade) {
   let tradeInfo = trade.direction + " " + trade.instrument.symbol + " | Trader: " + trade.trader.email;
   $("h3#trade-info").text(tradeInfo);
