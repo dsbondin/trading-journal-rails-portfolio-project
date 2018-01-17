@@ -19,7 +19,7 @@ class TradesController < ApplicationController
 
     respond_to do |format|
       format.html {render :index}
-      format.json {render json: @trades.to_json(include: :instrument )}
+      format.json {render json: @trades}
     end
   end
 
@@ -28,7 +28,7 @@ class TradesController < ApplicationController
       @comment = @trade.comments.build
       respond_to do |format|
         format.html {render :show}
-        format.json {render json: @trade.to_json(include: [:trader, :instrument])}
+        format.json {render json: @trade}
       end
     else
       render json: {error: "This trade has been deleted or hasn't been created yet.", id: params[:id]}
@@ -94,9 +94,5 @@ class TradesController < ApplicationController
     def trade_params
       params.require(:trade).permit(:direction, :entry, :exit, :quantity, :notes, :instrument_id, instrument_attributes: [:symbol])
     end
-
-    # def remove_empty_symbol
-    #   params[:trade].delete(:instrument_attributes) if params[:trade][:instrument_attributes][:symbol] == ""
-    # end
 
 end
