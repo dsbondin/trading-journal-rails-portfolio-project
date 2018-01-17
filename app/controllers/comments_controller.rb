@@ -7,7 +7,9 @@ class CommentsController < ApplicationController
   end
 
   def new
-    @comment = Comment.new
+    @trade = Trade.find_by(id: params[:trade_id])
+    @comment = @trade.comments.build
+    render layout: false
   end
 
   def create

@@ -20,3 +20,14 @@ const renderComments = function(comments) {
   $("button#show-comments").hide();
   $("button#add-comment").show();
 }
+
+const renderCommentForm = function() {
+  $("#add-comment").click(function() {
+    let tradeId = $(this).attr("trade-id")
+    console.log(tradeId)
+    $.get("/trades/" + tradeId + "/comments/new").success(function(response) {
+      console.log(response)
+      $("#comment-form").html(response);
+    })
+  })
+}

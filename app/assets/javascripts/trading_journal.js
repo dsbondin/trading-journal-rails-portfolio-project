@@ -3,6 +3,7 @@ $(document).ready(function() {
   loadInstruments();
   nextTrade();
   loadComments();
+  renderCommentForm();
 })
 
 const loadTrades = function() {
