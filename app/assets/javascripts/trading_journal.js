@@ -9,7 +9,6 @@ const loadTrades = function() {
   $("a.trades").click(function(e) {
     e.preventDefault();
     $.getJSON(this.href).success(function(trades) {
-      // debugger
       let tradesHTML = ""
       trades.forEach(function(trade) {
         tradesHTML += "<li><a href='/trades/" + trade.id +"'>" + trade.direction + " " + trade.instrument.symbol + "</a></li>"
@@ -23,7 +22,6 @@ const loadInstruments = function() {
   $("a.instruments").click(function(e) {
     e.preventDefault();
     $.getJSON(this.href).success(function(instruments) {
-      // debugger
       let instrumentsHTML = ""
       instruments.forEach(function(instrument) {
         instrumentsHTML += "<li><a href='/instruments/" + instrument.id +"'>" + instrument.symbol + "</a></li>"
@@ -37,16 +35,8 @@ const nextTrade = function() {
   $("a.trade_id").click(function(e) {
     let $nextId = parseInt($(this).attr("trade-id")) + 1;
     $.getJSON("/trades/" + $nextId).done(function(json) {
-      // console.log(trade)
       if (!json.error) {
-        // renderTrade(trade);
-        let trade = new Trade(json);
-        let tradeHTML = trade.renderTrade();
-        $("#trade-container").html(tradeHTML);
-        $(".trade_id").attr("trade-id", trade.id);
-        $(".hide-when-no-trade").show();
-        $("#comments").html("")
-        $("button#show-comments").show()
+        renderNormalTrade(json)
       } else {
         renderEmptyTrade(json);
       }
@@ -83,6 +73,17 @@ $(function() {
   Trade.source = $("#trade-template").html();
   Trade.template = Handlebars.compile(Trade.source);
 })
+
+const renderNormalTrade = function(json) {
+  let trade = new Trade(json);
+  let tradeHTML = trade.renderTrade();
+  $("#trade-container").html(tradeHTML);
+  $(".trade_id").attr("trade-id", trade.id);
+  $(".hide-when-no-trade").show();
+  $("#comments").html("")
+  $("button#show-comments").show()
+  $("button#add-comment").hide();
+}
 
 const renderEmptyTrade = function(json) {
   $("#trade-container").html("<p>" + json.error + "<p>");

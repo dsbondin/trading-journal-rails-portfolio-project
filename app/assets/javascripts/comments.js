@@ -9,7 +9,7 @@ const loadComments = function() {
 
 const renderComments = function(comments) {
   if (comments.length > 0) {
-    let commentsHTML = ""
+    let commentsHTML = "<p><b>Comments</b></p>"
     comments.forEach(function(comment) {
       commentsHTML += "<p>" + comment.trader.email + "<br>" + comment.body + "</p>";
       $("#comments").html(commentsHTML);
