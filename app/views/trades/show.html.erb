@@ -1,37 +1,30 @@
 <a href="#" class="trade_id" trade-id="<%= @trade.id %>">Next Trade</a>
 
 <div id="trade-container">
-  <h3 id="trade-info">
+  <h3>
     <%= @trade.direction.capitalize %>
     <%= @trade.instrument.symbol %> |
     Trader: <%= @trade.trader.email %>
   </h3>
-
-  <p id="date" class="hide-when-no-trade">
+  <p>
     Date: <%= @trade.created_at.strftime("%b %e, %Y") %>
   </p>
-
-  <p id="entry" class="hide-when-no-trade">
+  <p>
     Entry price: <%= to_currency(@trade.entry) %>
   </p>
-
-  <p id="exit" class="hide-when-no-trade">
+  <p>
     Exit price: <%= to_currency(@trade.exit) %>
   </p>
-
-  <p id="size" class="hide-when-no-trade">
+  <p>
     Size: <%= @trade.quantity %>
   </p>
-
-    <p id="pnl" class="hide-when-no-trade">
-      Profit/loss: <%= to_currency(@trade.profit_loss) %>
-    </p>
-
-  <p id="notes" class="hide-when-no-trade">
+  <p>
+    Profit/loss: <%= to_currency(@trade.profit_loss) %>
+  </p>
+  <p>
     Notes: <%= @trade.notes %>
   </p>
-
-  <p class="hide-when-no-trade">
+  <p>
     <% if @trade.trader == current_trader %>
       <%= link_to"Edit", edit_trade_path(@trade) %> |
       <%= link_to("Delete", @trade, method: :delete) %>
