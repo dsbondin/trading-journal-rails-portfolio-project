@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
     @comment = trade.comments.build(comment_params)
     @comment.trader = current_trader
     @comment.save
-    render json: @comment.to_json
+    render json: @comment
   end
 
   def edit

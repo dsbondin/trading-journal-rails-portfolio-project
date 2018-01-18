@@ -4,6 +4,7 @@ $(document).ready(function() {
   nextTrade();
   loadComments();
   renderCommentForm();
+  // postComment();
 })
 
 const loadTrades = function() {
@@ -80,8 +81,8 @@ $(function() {
 })
 
 const renderNormalTrade = function(json) {
-  let trade = new Trade(json);
-  let tradeHTML = trade.renderTrade();
+  const trade = new Trade(json);
+  const tradeHTML = trade.renderTrade();
   $("#trade-container").html(tradeHTML);
   $(".trade_id").attr("trade-id", trade.id);
   $(".hide-when-no-trade").show();

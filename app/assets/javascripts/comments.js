@@ -24,10 +24,29 @@ const renderComments = function(comments) {
 const renderCommentForm = function() {
   $("#add-comment").click(function() {
     let tradeId = $(this).attr("trade-id")
-    console.log(tradeId)
-    $.get("/trades/" + tradeId + "/comments/new").success(function(response) {
-      console.log(response)
-      $("#comment-form").html(response);
+    renderForm(tradeId);
+  })
+}
+
+const renderForm = function(tradeId) {
+  $.get("/trades/" + tradeId + "/comments/new").success(function(response) {
+    $("#comment-form").html(response);
+    $("#add-comment").hide();
+    postComment(); // add to blog post
+  })
+}
+
+const postComment = function() {
+  $("form.new_comment").on("submit", function(e) {
+    e.preventDefault();
+    $form = $(this);
+    postData = $form.serialize();
+    $.post(this.action, postData).done(function(comment){
+      let commentHTML = ""
+      commentHTML += "<p>" + comment.trader.email + "<br>" + comment.body + "</p>";
+      $("#comments").append(commentHTML);
+      $("textarea#comment_body").val("")
+      renderForm($("input#trade_id").val());
     })
   })
 }

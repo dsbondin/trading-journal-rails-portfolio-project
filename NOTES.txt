@@ -2,12 +2,15 @@ NOTES FOR JS REFACTORING
 
 1. Display the index of the trades on the traders show page, fetching the trades via an AJAX GET request,
 with the backend rendering the trades in JSON format, and then appending the trades to the page.
+---DONE---
 
 2. Allow a user to sift through the trades by clicking a 'Next' button on the trades show page, with the next
 trade being fetched and rendered via JQuery/AJAX.
+---DONE---
 
 3. The rails API must reveal at least one has-many relationship in the JSON that is then rendered to the page.
 For example if each of those trades has many comments, you could render those comments as well on that show page.
+---DONE---
 
 4. A user might be able to add a comment to a trade, and the comment would be serialized, and submitted
 via an AJAX POST request, with the response being the new object in JSON and then appending that new comment to
@@ -18,3 +21,4 @@ on the prototype. Formatters work really well for this. Borrowing from the previ
 taking the JSON response of the newly created comment and appending it to the DOM, you would create a Comment
 prototype object and add a function to that prototype to perhaps concatenate (format) the comments authors first
 and last name. You would then use the object to append the comment information to the DOM.
+---DONE---(partially)
