@@ -1,8 +1,8 @@
 const loadComments = function() {
   $("button#show-comments").click(function() {
     let trade_id = $(this).attr("trade-id")
-    $.getJSON("/trades/" + trade_id + "/comments").done(function(comments) {
-      renderComments(comments);
+    $.getJSON("/trades/" + trade_id + "/comments").done(function(response) {
+      renderComments(response);
     })
   })
 }
@@ -10,8 +10,9 @@ const loadComments = function() {
 const renderComments = function(comments) {
   if (comments.length > 0) {
     let commentsHTML = "<p><b>Comments</b></p>"
-    comments.forEach(function(comment) {
-      commentsHTML += "<p>" + comment.trader.email + "<br>" + comment.body + "</p>";
+    comments.forEach(function(each) {
+      const comment = new Comment(each);
+      commentsHTML += comment.renderComment();
       $("#comments").html(commentsHTML);
     })
   } else {
@@ -41,12 +42,22 @@ const postComment = function() {
     e.preventDefault();
     $form = $(this);
     postData = $form.serialize();
-    $.post(this.action, postData).done(function(comment){
-      let commentHTML = ""
-      commentHTML += "<p>" + comment.trader.email + "<br>" + comment.body + "</p>";
-      $("#comments").append(commentHTML);
+    $.post(this.action, postData).done(function(response){
+      const comment = new Comment(response);
+      $("#comments").append(comment.renderComment());
       $("textarea#comment_body").val("")
       renderForm($("input#trade_id").val());
     })
   })
+}
+
+class Comment {
+  constructor(json) {
+    this.body = json.body
+    this.trader = json.trader.email
+  }
+
+  renderComment() {
+    return `<p><b>${this.trader}</b><br>${this.body}</p>`
+  }
 }
