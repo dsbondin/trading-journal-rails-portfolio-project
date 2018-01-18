@@ -1,3 +1,14 @@
+class Comment {
+  constructor(json) {
+    this.body = json.body
+    this.trader = json.trader.email
+  }
+
+  renderComment() {
+    return `<p><b>${this.trader}</b><br>${this.body}</p>`
+  }
+}
+
 const loadComments = function() {
   $("button#show-comments").click(function() {
     let trade_id = $(this).attr("trade-id")
@@ -49,15 +60,4 @@ const postComment = function() {
       renderForm($("input#trade_id").val());
     })
   })
-}
-
-class Comment {
-  constructor(json) {
-    this.body = json.body
-    this.trader = json.trader.email
-  }
-
-  renderComment() {
-    return `<p><b>${this.trader}</b><br>${this.body}</p>`
-  }
 }
