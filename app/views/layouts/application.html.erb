@@ -5,7 +5,6 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application' %>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
   </head>
 
   <body>
@@ -20,6 +19,30 @@
     </p>
 
     <%= yield %>
+
+    <script id="trade-template" type="text/x-handlebars-template">
+      <h3>
+        {{direction}} {{instrument}} | Trader: {{trader}}
+      </h3>
+      <p>
+        Date: {{date}}
+      </p>
+      <p>
+        Entry price: {{entry}}
+      </p>
+      <p>
+        Exit price: {{exit}}
+      </p>
+      <p>
+        Size: {{size}}
+      </p>
+      <p>
+        Profit/loss: {{PNL}}
+      </p>
+      <p>
+        Notes: {{notes}}
+      </p>
+    </script>
 
   </body>
 </html>

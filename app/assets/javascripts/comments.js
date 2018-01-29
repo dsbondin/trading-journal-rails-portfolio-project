@@ -44,15 +44,15 @@ const renderForm = function(tradeId) {
   $.get("/trades/" + tradeId + "/comments/new").success(function(response) {
     $("#comment-form").html(response);
     $("#add-comment").hide();
-    postComment(); // add to blog post
+    postComment();
   })
 }
 
 const postComment = function() {
   $("form.new_comment").on("submit", function(e) {
     e.preventDefault();
-    $form = $(this);
-    postData = $form.serialize();
+    // $form = $(this);
+    postData = $(this).serialize();
     $.post(this.action, postData).done(function(response){
       const comment = new Comment(response);
       $("#comments").append(comment.renderComment());

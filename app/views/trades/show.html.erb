@@ -1,4 +1,4 @@
-<a href="#" class="trade_id" trade-id="<%= @trade.id %>">Next Trade</a>
+<a href="#" id="next-trade" class="trade_id" trade-id="<%= @trade.id %>">Next Trade</a>
 
 <div id="trade-container">
   <h3>
@@ -41,27 +41,3 @@
 
 <div id="comment-form">
 </div>
-
-<script id="trade-template" type="text/x-handlebars-template">
-  <h3>
-    {{direction}} {{instrument}} | Trader: {{trader}}
-  </h3>
-  <p>
-    Date: {{date}}
-  </p>
-  <p>
-    Entry price: {{entry}}
-  </p>
-  <p>
-    Exit price: {{exit}}
-  </p>
-  <p>
-    Size: {{size}}
-  </p>
-  <p>
-    Profit/loss: {{PNL}}
-  </p>
-  <p>
-    Notes: {{notes}}
-  </p>
-</script>

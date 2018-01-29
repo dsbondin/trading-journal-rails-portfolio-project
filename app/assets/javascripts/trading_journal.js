@@ -34,7 +34,7 @@ const loadInstruments = function() {
 }
 
 const nextTrade = function() {
-  $("a.trade_id").click(function(e) {
+  $("a#next-trade").click(function() {
     let $nextId = parseInt($(this).attr("trade-id")) + 1;
     $.getJSON("/trades/" + $nextId).done(function(json) {
       if (!json.error) {
