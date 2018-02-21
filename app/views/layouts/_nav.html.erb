@@ -4,7 +4,7 @@
     <%= link_to "Home", root_path %> |
     <% unless trader_signed_in? %>
       <%= link_to("Sign Up", new_trader_registration_path) %> |
-      <%= link_to("Log In", new_trader_session_path) %> |
+      <%= link_to("Log In", new_trader_session_path) %> | demo-login: bob@gmail.com, password: 123456
     <% else %>
       <%= link_to "My Desk", trader_path(current_trader) %> |
       <%= link_to "All Trades", trades_path %> |
