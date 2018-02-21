@@ -11,10 +11,11 @@ class Comment {
 
 const loadComments = function() {
   $("button#show-comments").click(function() {
-    let trade_id = $(this).attr("trade-id")
-    $.getJSON("/trades/" + trade_id + "/comments").done(function(response) {
-      renderComments(response);
-    })
+    const trade_id = $(this).attr("trade-id")
+    $.getJSON("/trades/" + trade_id + "/comments")
+      .done(function(response) {
+        renderComments(response);
+      })
   })
 }
 

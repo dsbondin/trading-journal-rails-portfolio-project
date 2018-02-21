@@ -97,3 +97,6 @@ const renderEmptyTrade = function(json) {
   $(".hide-when-no-trade").hide();
   $(".trade_id").attr("trade-id", json.id);
 }
+
+
+// blog post on hoisting and scope (this)
