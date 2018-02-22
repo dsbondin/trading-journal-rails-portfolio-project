@@ -8,6 +8,7 @@ class Trader < ApplicationRecord
   has_many :instruments, -> { distinct }, through: :trades
 
   def self.from_omniauth(auth)
+    binding.pry
     where(provider: auth.provider, uid: auth.uid).first_or_create do |trader|
       trader.provider = auth.provider
       trader.uid = auth.uid
