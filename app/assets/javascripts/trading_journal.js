@@ -4,7 +4,6 @@ $(document).ready(function() {
   nextTrade();
   loadComments();
   renderCommentForm();
-  // postComment();
 })
 
 const loadTrades = function() {
@@ -97,6 +96,3 @@ const renderEmptyTrade = function(json) {
   $(".hide-when-no-trade").hide();
   $(".trade_id").attr("trade-id", json.id);
 }
-
-
-// blog post on hoisting and scope (this)
